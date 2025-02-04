@@ -16,6 +16,6 @@ fun main(){
 
     var myAge : Int = 28
 
-    var fullString: String = myName + " " + myAge
+    var fullString = "$myName $myAge"
     println(fullString)
 }
