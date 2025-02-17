@@ -1,16 +1,37 @@
 class SmartDevice {
+
+    private var deviceName = "Smart Television"
+    private var deviceCategory = "Entertainment"
+    private var deviceStatus = "online"
+
     // empty body
     fun turnOn() {
-        println("Smart Device is turned on.")
+        println("$deviceName is turned on.")
     }
 
     fun turnOff() {
-        println("Smart Device is turned off.")
+        println("$deviceName is turned off.")
+    }
+
+    fun printName() {
+        println("Device name is: $deviceName")
+    }
+
+    fun setDeviceName(deviceName: String) {
+        this.deviceName = deviceName
+    }
+
+    fun getDeviceName(): String {
+        return this.deviceName
     }
 }
 
-fun main(){
+fun main() {
     val smartTvDevice = SmartDevice()
     smartTvDevice.turnOn()
     smartTvDevice.turnOff()
+    smartTvDevice.printName()
+    smartTvDevice.setDeviceName("Smart Refrigerator")
+    smartTvDevice.printName()
+    println("Device Name: ${smartTvDevice.getDeviceName()}")
 }
