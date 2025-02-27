@@ -19,12 +19,12 @@ open class SmartDevice(val name: String, val category: String) {
         }
      */
 
-    fun turnOn() {
-        println("Smart Device is turned on.")
+    open fun turnOn() {
+        deviceStatus = "On"
     }
 
-    fun turnOff() {
-        println("Smart Device is turned off.")
+    open fun turnOff() {
+        deviceStatus = "Off"
     }
 }
 
@@ -55,6 +55,20 @@ class SmartTvDevice(deviceName: String, deviceCategory: String) :
         channelNumber++
         println("Channel number set to ${this.channelNumber}")
     }
+
+    override fun turnOn() {
+        super.turnOn()
+        println(
+            "${this.name} is turned on. Speaker volume is set to ${this.speakerVolume}, and channel number is set to " +
+                    "${this.channelNumber}"
+        )
+    }
+
+    override fun turnOff() {
+        println(
+            "${this.name} is turned off."
+        )
+    }
 }
 
 class SmartLightDevice(deviceName: String, deviceCategory: String) :
@@ -71,11 +85,68 @@ class SmartLightDevice(deviceName: String, deviceCategory: String) :
         brightnessLevel++
         println("Brightness level increased to ${this.brightnessLevel}")
     }
-        }
+
+    override fun turnOn() {
+        brightnessLevel = 2
+        println("${this.name} turned on. The brightness level is ${this.brightnessLevel}.")
+    }
+
+    override fun turnOff() {
+        super.turnOff()
+        brightnessLevel = 0
+        println("${this.name} turned off.")
+    }
+}
+
+class SmartHome(
+    val smartTvDevice: SmartTvDevice,
+    val smartLightDevice: SmartLightDevice
+) {
+    fun turnOnTv() {
+        smartTvDevice.turnOn()
+    }
+
+    fun turnOffTv() {
+        smartTvDevice.turnOff()
+    }
+
+    fun increaseTvVolume() {
+        smartTvDevice.increaseVolume()
+    }
+
+    fun changeTvChannelToNext() {
+        smartTvDevice.nextChannel()
+    }
+
+    fun turnOnLight() {
+        smartLightDevice.turnOn()
+    }
+
+    fun turnOffLight() {
+        smartLightDevice.turnOff()
+    }
+
+    fun increaseLightBrightness() {
+        smartLightDevice.increaseBrightness()
+    }
+
+    fun turnOffAllDevices() {
+        smartTvDevice.turnOff()
+        smartLightDevice.turnOff()
+    }
+}
 
 fun main() {
-    val smartTvDevice = SmartDevice(name = "Android TV", category = "Entertainment")
-    println("Device name is: ${smartTvDevice.name}")
-    smartTvDevice.turnOn()
-    smartTvDevice.turnOff()
+    var smartDevice: SmartDevice = SmartDevice(name = "Android TV", category = "Entertainment")
+    smartDevice.turnOn()
+    smartDevice.turnOff()
+
+    smartDevice = SmartTvDevice(deviceName = "Android TV", deviceCategory = "Entertainment")
+    smartDevice.turnOn()
+    smartDevice.turnOff()
+
+    smartDevice = SmartLightDevice(deviceName = "Google Light", deviceCategory = "Utility")
+    smartDevice.turnOn()
+    smartDevice.turnOff()
+    smartDevice.increaseBrightness()
 }

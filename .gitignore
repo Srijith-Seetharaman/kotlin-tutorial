@@ -33,3 +33,4 @@ bin/
 
 ### Intellij IDEA ###
 .idea
+*.jar
